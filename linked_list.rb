@@ -34,7 +34,11 @@ class LinkedList
   end
 
   def at(index)
-
+    current_node = @head
+    index.times do
+      current_node = current_node.next_node
+    end
+    current_node
   end
 
   def pop
@@ -45,7 +49,14 @@ class LinkedList
   end
 
   def containes?(value)
-
+    current_node = @head
+    until current_node == nil
+      if current_node.value == value
+        break
+      end
+      current_node = current_node.next_node
+    end
+    current_node != nil ? true : false
   end
 
   def find(value)
@@ -67,8 +78,10 @@ end
 test_list = LinkedList.new
 
 test_list.append(1)
-test_list.append(2)
-test_list.append(37)
+test_list.append(22)
+test_list.append(3000)
+test_list.append(524)
+test_list.append(177)
 
 puts test_list.to_s
 puts "Likned list size: #{test_list.size}"
@@ -77,3 +90,17 @@ test_list.prepend(100)
 
 puts test_list.to_s
 puts "Linked list size: #{test_list.size}"
+puts
+
+puts "Head Node:"
+p test_list.head
+puts
+
+puts "Tail Node:"
+p test_list.tail
+puts
+
+puts "Value of Node at index 3 = #{test_list.at(3).value}"
+
+puts "Linked List contains 1?: #{test_list.containes?(1)}"
+puts "Linked List contains -1? #{test_list.containes?(-1)}"
