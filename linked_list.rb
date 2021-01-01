@@ -4,11 +4,13 @@ class LinkedList
   attr_accessor :head, :tail
 
   def initialize
+    @@count = 0
     @head = nil
     @tail = nil
   end
   
   def append(value)
+    @@count += 1
     node = Node.new(value)
 
     if @head == nil
@@ -21,13 +23,14 @@ class LinkedList
   end
 
   def prepend(value)
+    @@count += 1
     temp = @head
     @head = Node.new(value)
     @head.next_node = temp
   end
 
   def size
-
+    @@count
   end
 
   def at(index)
@@ -35,6 +38,7 @@ class LinkedList
   end
 
   def pop
+    @@count -= 1
     node = @head
     @head = @head.next_node
     node
@@ -67,11 +71,9 @@ test_list.append(2)
 test_list.append(37)
 
 puts test_list.to_s
+puts "Likned list size: #{test_list.size}"
 
 test_list.prepend(100)
 
 puts test_list.to_s
-
-p test_list.head
-
-p test_list.tail
+puts "Linked list size: #{test_list.size}"
