@@ -18,23 +18,16 @@ class LinkedList
       @tail.next_node = node
       @tail = tail.next_node
     end
-
   end
 
   def prepend(value)
-
+    temp = @head
+    @head = Node.new(value)
+    @head.next_node = temp
   end
 
   def size
 
-  end
-
-  def head
-    @head
-  end
-
-  def tail
-    @tail
   end
 
   def at(index)
@@ -74,3 +67,11 @@ test_list.append(2)
 test_list.append(37)
 
 puts test_list.to_s
+
+test_list.prepend(100)
+
+puts test_list.to_s
+
+p test_list.head
+
+p test_list.tail
