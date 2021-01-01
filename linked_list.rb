@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'node'
 
 class LinkedList
@@ -8,12 +10,12 @@ class LinkedList
     @head = nil
     @tail = nil
   end
-  
+
   def append(value)
     @@count += 1
     node = Node.new(value)
 
-    if @head == nil
+    if @head.nil?
       @head = node
       @tail = node
     else
@@ -44,47 +46,43 @@ class LinkedList
   def pop
     @@count -= 1
     current_node = @head
-    until current_node.next_node.next_node == nil
-      current_node = current_node.next_node
-    end
+    current_node = current_node.next_node until current_node.next_node.next_node.nil?
     current_node.next_node = nil
     @tail = current_node
   end
 
   def containes?(value)
     current_node = @head
-    until current_node == nil
-      if current_node.value == value
-        break
-      end
+    until current_node.nil?
+      break if current_node.value == value
+
       current_node = current_node.next_node
     end
-    current_node != nil ? true : false
+    !current_node.nil? ? true : false
   end
 
   def find(value)
     index = 0
     current_node = @head
-    until current_node == nil
+    until current_node.nil?
       if current_node.value == value
         return index
-        break
       else
         index += 1
         current_node = current_node.next_node
       end
     end
-    return -1
+    -1
   end
 
   def to_s
-    string = ""
+    string = ''
     current_node = @head
-    until current_node == nil
+    until current_node.nil?
       string += "( #{current_node.value} ) => "
       current_node = current_node.next_node
     end
-    string += "nil"
+    string += 'nil'
     string
   end
 end
@@ -106,11 +104,11 @@ puts test_list.to_s
 puts "Linked list size: #{test_list.size}"
 puts
 
-puts "Head Node:"
+puts 'Head Node:'
 p test_list.head
 puts
 
-puts "Tail Node:"
+puts 'Tail Node:'
 p test_list.tail
 puts
 
