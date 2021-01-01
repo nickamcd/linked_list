@@ -43,9 +43,12 @@ class LinkedList
 
   def pop
     @@count -= 1
-    node = @head
-    @head = @head.next_node
-    node
+    current_node = @head
+    until current_node.next_node.next_node == nil
+      current_node = current_node.next_node
+    end
+    current_node.next_node = nil
+    @tail = current_node
   end
 
   def containes?(value)
@@ -60,7 +63,18 @@ class LinkedList
   end
 
   def find(value)
-
+    index = 0
+    current_node = @head
+    until current_node == nil
+      if current_node.value == value
+        return index
+        break
+      else
+        index += 1
+        current_node = current_node.next_node
+      end
+    end
+    return -1
   end
 
   def to_s
@@ -102,5 +116,11 @@ puts
 
 puts "Value of Node at index 3 = #{test_list.at(3).value}"
 
+puts "Popping value from back: #{test_list.pop}"
+puts test_list.to_s
+
 puts "Linked List contains 1?: #{test_list.containes?(1)}"
 puts "Linked List contains -1? #{test_list.containes?(-1)}"
+
+puts "Index of 524: #{test_list.find(524)}"
+puts "Index of 737: #{test_list.find(737)}"
